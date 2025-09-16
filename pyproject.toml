@@ -1,0 +1,22 @@
+[project]
+name = "bbsm"
+authors = [{ name = "huangtao", email = "huangtao.sh@icloud.com" }]
+dependencies = ["XlsxWriter", "orange_kit", "xlrd3"]
+dynamic = ["version"]
+
+[project.scripts]
+bbsm = "bbsm.bbsm.__main__:main"
+bf = "bbsm.bf:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+version = { attr = "bbsm.__version__.version" }
+
+[tool.setuptools.package-data]
+bbsm = ["*.sql"]
+
+[options]
+include_package_data = true

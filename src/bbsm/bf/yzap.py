@@ -8,6 +8,7 @@
 from bbsm import db
 from orange import date, Path, suppress
 from orange.xlsx import Header
+from typing import Iterable
 
 path = Path("E:/Personal/工作/参数备份/验证安排/验证安排分行.xlsx")
 
@@ -20,7 +21,7 @@ def update_anpai():
     db.lcheck("yzanpai", path, path.mtime, None)
     print("导入验证安排分行")
 
-    def read():
+    def read() -> Iterable:
         for row in path.read_sheet(start_row=1):
             for fh in row[1].split("、"):
                 print(fh, date(row[0]), row[2])

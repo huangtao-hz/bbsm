@@ -35,7 +35,10 @@ def update_yzsj(tcrq, publish=False):
     """
     print("设置验证时间")
     yzsj = db.fetchvalue('select date(?,"1 day")', [tcrq])
-    yzsj = "{}年{}月{}日".format(*map(int, yzsj.split("-")))
+    if isinstance(yzsj, str):
+        yzsj = "{}年{}月{}日".format(*map(int, yzsj.split("-")))
+    else:
+        yzsj = ""
 
     # 检查安排时间错误
     obj = db.fetch(

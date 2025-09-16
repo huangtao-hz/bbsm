@@ -34,4 +34,4 @@ def tctz(path: Path, tcrq: str):
     # p.style.aligment=WD_ALIGN_PARAGRAPH.CENTER
     # p.style.font.size = 12
 
-    doc.save(path)
+    doc.save(str(path))

@@ -14,7 +14,7 @@ from typing import Iterable
 def read(path: Path) -> Iterable:
     sheet = first(Path(path).worksheets)
     data = sheet._cell_values
-    rq = sheet.name.replace("-", "")
+    rq = extract(sheet.name, r"\d{4}-?\d{2}-?\d{2}").replace("-", "")
     rq2 = extract(path.pname, r"\d{8}")
     if rq != rq2:
         raise Exception(f"文件名中日期 {rq2} 与工作表中日期 {rq} 不一致")

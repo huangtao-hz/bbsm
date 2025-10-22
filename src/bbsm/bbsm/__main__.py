@@ -72,7 +72,7 @@ def main(**options):
             [f"%{nr}%"],
         )
     if options.get("export"):
-        from .write import export
+        from bbsm.util.write import export
 
         export()
     if options.get("publish"):

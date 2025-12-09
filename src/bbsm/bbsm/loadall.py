@@ -61,7 +61,7 @@ def load(path: Path):
     with db:
         db.lcheck("bbsm", path.name, path.mtime, ver)
         print(path.name, end="\t")
-        db.load("bbsm", 11, data=read(path), clear=False, print_result=True)
+        db.load("bbsm", fields=11, data=read(path), clear=False, print_result=True)
 
 
 def loadall():
@@ -92,7 +92,7 @@ def load_all():
             with zf.open(fileinfo) as f:
                 db.load(
                     "bbsm",
-                    11,
+                    fields=11,
                     data=read(None, f.read()),
                     clear=False,
                     print_result=True,

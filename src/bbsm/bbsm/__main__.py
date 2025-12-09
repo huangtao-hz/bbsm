@@ -35,12 +35,12 @@ def main(**options):
         print("创建数据库完成")
     if options.get("tongjia"):
         print(" 投产日期      优化数量")
-        db.fprintf(
+        db.printf(
             "{}      {:4,d}", f"select rq,sum(sl) from ({view}) group by rq order by rq"
         )
     if options.get("tongjib"):
         print(" 年份    投产次数  优化数量")
-        db.fprintf(
+        db.printf(
             "{}       {:3d}      {:5,d}",
             'select strftime("%Y",rq)as nf,count(distinct rq),sum(sl) from '
             f"({view}) "
@@ -53,20 +53,20 @@ def main(**options):
         load_all()
     jym = options.get("jym")
     if jym:
-        db.fprintf(
+        db.printf(
             "交易码：{}  交易名称：{}",
             "select jym,jymc,lxr from bbsm where jym=? order by rq desc limit 1",
             [jym],
             print_rows=False,
         )
-        db.fprintf(
+        db.printf(
             "{}    {}\n{}",
             "select rq,lxr,nr from bbsm where jym=? order by rq asc",
             [jym],
         )
     nr = options.get("nr")
     if nr:
-        db.fprintf(
+        db.printf(
             "{}    {}-{}    {}\n{}",
             'select rq,ifnull(jym,""),jymc,lxr,nr from bbsm where nr like ? order by rq asc',
             [f"%{nr}%"],

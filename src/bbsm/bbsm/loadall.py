@@ -6,7 +6,7 @@
 # 创建：2021-07-17 20:01
 
 
-from typing import Optional
+from typing import Iterable, Optional
 
 from orange import HOME, Path, R, datetime, extract, suppress
 from xlrd3 import open_workbook
@@ -14,7 +14,7 @@ from xlrd3 import open_workbook
 from bbsm import db, endate
 
 
-def read(path: Optional[Path] = None, file_contents=None):
+def read(path: Optional[Path] = None, file_contents=None) -> Iterable:
     "读取版本说明文件"
     header1 = "序号,系统或项目,交易码,交易名称,测试内容,优化原因,验证机构,要求完成时间,验证要求,联系人"
     header2 = "序号,系统或项目,交易码及交易名称,测试内容,优化原因,验证网点,要求完成时间,验证要求,联系人"

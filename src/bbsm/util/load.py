@@ -9,12 +9,14 @@
 from typing import Iterable
 
 from orange import Path, extract, first
+from xlrd3 import sheet as Sheet
 
 from bbsm import db, endate
 
 
 def read(path: Path) -> Iterable:
     sheet = first(Path(path).worksheets)
+    assert sheet is Sheet and sheet is not None
     data = sheet._cell_values
     rq = extract(sheet.name, r"\d{4}-?\d{2}-?\d{2}").replace("-", "")
     rq2 = extract(path.pname, r"\d{8}")

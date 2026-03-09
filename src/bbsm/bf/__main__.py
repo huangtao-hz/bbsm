@@ -6,9 +6,9 @@
 # 创建：2022-04-20 22:01
 # 修订：2023-04-20 10:53 增加 publish 参数，选择时不输出审批人，未选择时，输出审批人
 
-from orange import Path, extract, arg, command
-
 import shutil
+
+from orange import Path, arg, command, extract
 
 
 @command(description="版本说明格式化程序", allow_empty=True)
@@ -16,11 +16,12 @@ import shutil
 @arg("-d", "--delete", nargs="?", metavar="tcrq", help="删除指定日期的版本")
 def main(**options):
     Home = Path("~/Documents/当前工作")
-    from .check import check
-    from bbsm.util.load import load
-    from bbsm.util.write import write
-    from bbsm.util.rymd import load_rymd
     from bbsm import db
+    from bbsm.util.load import load
+    from bbsm.util.rymd import load_rymd
+    from bbsm.util.write import write
+
+    from .check import check
 
     load_rymd()
     path = Home.find("附件*版本说明????????.xls*")  # 查找版本说明文件
@@ -43,7 +44,7 @@ def main(**options):
         print("当前文件：", path.name)
         rq = extract(path.name, r"\d{8}")
         rq = f"{rq[:4]}-{rq[4:6]}-{rq[6:]}"
-        shutil.copy(path, (path.parent / (path.pname + "_bak")).with_suffix(".xlsx"))
+        shutil.copy(path, path.with_name(f"{path.pname}_bak.xlsx"))
         load(path)
         check(rq, publish=bool(options.get("publish")))
         write(path, rq, shenpi=not options.get("publish"))

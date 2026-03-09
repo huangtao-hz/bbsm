@@ -6,13 +6,15 @@
 # 创建：2021-07-17 20:01
 
 
+from typing import Optional
+
 from orange import HOME, Path, R, datetime, extract, suppress
 from xlrd3 import open_workbook
-from bbsm import db
-from bbsm import endate
+
+from bbsm import db, endate
 
 
-def read(path: Path = None, file_contents=None):
+def read(path: Optional[Path] = None, file_contents=None):
     "读取版本说明文件"
     header1 = "序号,系统或项目,交易码,交易名称,测试内容,优化原因,验证机构,要求完成时间,验证要求,联系人"
     header2 = "序号,系统或项目,交易码及交易名称,测试内容,优化原因,验证网点,要求完成时间,验证要求,联系人"
@@ -43,6 +45,7 @@ def read(path: Path = None, file_contents=None):
             for r1, r2, c1, c2 in merged_cells:
                 if r1 <= row < r2 and c1 <= col < c2:
                     return data[r1][c1]
+            return ""
 
         for r, row in enumerate(data[1:], 1):
             row = list(row[1:10])

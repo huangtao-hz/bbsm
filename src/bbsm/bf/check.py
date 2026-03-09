@@ -7,7 +7,9 @@
 # 修订：2022-05-11 15:27 修正投产日期小于当前日期系统提醒的 bug
 
 import uuid
+
 from orange import R, now
+
 from bbsm import db
 
 """
@@ -89,7 +91,7 @@ def modify(jym: str, jymc: str, tcrq: str):
         max(tcrq, now() % "%F"),
     ]
     with db:
-        db.load("jycsb", 32, data=[obj], method="replace", clear=False)
+        db.load("jycsb", fields=32, data=[obj], method="replace", clear=False)
         print("更新投产参数表完成！")
 
 

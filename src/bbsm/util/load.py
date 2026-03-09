@@ -6,9 +6,11 @@
 # 创建：2022-04-20 21:38
 # 修订：2023-04-20 11:01 对导入的数据，删除前后不可见字符
 
-from orange import Path, extract, first
-from bbsm import db, endate
 from typing import Iterable
+
+from orange import Path, extract, first
+
+from bbsm import db, endate
 
 
 def read(path: Path) -> Iterable:
@@ -42,4 +44,4 @@ def read(path: Path) -> Iterable:
 @db.tran
 def load(path):
     "读取文件数据"
-    db.load("bbsm", 11, read(path), clear=False, print_result=True)
+    db.load("bbsm", fields=11, data=read(path), clear=False, print_result=True)

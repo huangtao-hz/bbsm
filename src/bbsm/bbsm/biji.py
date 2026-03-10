@@ -41,7 +41,8 @@ def publish():
             jy = row[2:-2].split("-")[0]
             jy_data[jy] = row[2:-2]
 
-    lated_date = db.fetchvalue("select max(rq)from bbsm") or ""
+    lated_date = db.fetchvalue("select max(rq)from bbsm")
+    assert lated_date is not None and isinstance(lated_date, str)
     print(updated_date, lated_date)
     if updated_date >= lated_date:
         print("无需更新")

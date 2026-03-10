@@ -44,7 +44,7 @@ def main(**options):
         print("当前文件：", path.name)
         rq = extract(path.name, r"\d{8}")
         rq = f"{rq[:4]}-{rq[4:6]}-{rq[6:]}"
-        shutil.copy(path, path.with_name(f"{path.pname}_bak.xlsx"))
+        shutil.copy(path, path.with_name(f"{path.pname}_bak{path.suffix}"))
         load(path)
         check(rq, publish=bool(options.get("publish")))
         write(path, rq, shenpi=not options.get("publish"))

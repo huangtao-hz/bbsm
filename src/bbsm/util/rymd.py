@@ -5,8 +5,9 @@
 # Email:   huangtao.sh@icloud.com
 # 创建：2024-05-07 08:18
 
-from bbsm import db
 from orange import Path, slicer, suppress
+
+from bbsm import db
 
 
 @suppress
@@ -19,8 +20,8 @@ def load_rymd():
         db.lcheck("rymd", path, path.mtime)
         db.load(
             "rymd",
-            3,
-            path.read_sheet(slicer(1, 4), sheet=0, start_row=2),
+            fields=3,
+            data=path.read_sheet(slicer(1, 4), sheet=0, start_row=2),
             clear=True,
             print_result=True,
         )

@@ -5,10 +5,12 @@
 # Email:   huangtao.sh@icloud.com
 # 创建：2023-04-28 10:37
 
-from bbsm import db
-from orange import date, Path, suppress
-from orange.xlsx import Header
 from typing import Iterable
+
+from orange import Path, date, suppress
+from orange.xlsx import Header
+
+from bbsm import db
 
 path = Path("E:/Personal/工作/参数备份/验证安排/验证安排分行.xlsx")
 
@@ -27,7 +29,14 @@ def update_anpai():
                 print(fh, date(row[0]), row[2])
                 yield fh, date(row[0]), row[2]
 
-    db.load("yzanpai", 3, read(), clear=True, method="replace", print_result=True)
+    db.load(
+        "yzanpai",
+        fields=3,
+        data=read(),
+        clear=True,
+        method="replace",
+        print_result=True,
+    )
 
 
 @suppress
